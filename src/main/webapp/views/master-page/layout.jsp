@@ -24,7 +24,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link rel="shortcut icon" href="/favicon.ico"/> 
+<!-- <link rel="shortcut icon" href="/favicon.ico"/> --> 
+<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
