@@ -58,5 +58,22 @@
 	</bean>
 	
 	<!-- Other domain beans come here -->	
-	
+	<!-- Shouts -->
+	<bean id="shout1" class="domain.Shout">
+	    <property name="username" value="John Doe" />
+	    <property name="link" value="http://www.uhu.es" />
+	    <property name="text" value="My alma mater" />
+	</bean>
+		
+	<bean id="shout2" class="domain.Shout">
+	    <property name="username" value="Hedy ZD" />
+	    <property name="link" value="https://www.amazon.es" />
+	    <property name="text" value="Easy and comfortable!" />
+	</bean>
+		
+	<bean id="shout3" class="domain.Shout">		
+	    <property name="username" value="María López" />
+	    <property name="link" value="https://www.change.org" />
+	    <property name="text" value="Help!" />
+	</bean>
 </beans>
