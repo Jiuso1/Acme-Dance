@@ -28,9 +28,9 @@ import forms.Calculator;
 @RequestMapping("/profile")
 public class ProfileController extends AbstractController {
 
-	// Action-1 ---------------------------------------------------------------
+	// Famous-quotes ---------------------------------------------------------------
 
-	@RequestMapping(value = "/action-1", method = RequestMethod.GET)
+	@RequestMapping(value = "/famous-quotes", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		ModelAndView result;
 		List<String> quotes;
@@ -44,7 +44,7 @@ public class ProfileController extends AbstractController {
 		Collections.shuffle(quotes);
 		quotes = quotes.subList(0, 3);
 
-		result = new ModelAndView("profile/action-1");
+		result = new ModelAndView("profile/famous-quotes");
 		result.addObject("quotes", quotes);
 
 		return result;

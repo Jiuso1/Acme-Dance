@@ -40,7 +40,7 @@ public class CustomerController extends AbstractController {
 
 	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1")
+	@RequestMapping(value = "/action-1", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		ModelAndView result;
 

@@ -1,5 +1,5 @@
 <%--
- * action-1.jsp
+ * famous-quotes.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -15,8 +15,6 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
-<p><spring:message code="profile.action.1" /></p>
 
 <p><spring:message code="profile.action.1" /></p>
 <ol>
