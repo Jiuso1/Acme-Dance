@@ -82,9 +82,25 @@
 		<property name="hora" value="10" />
 		<property name="nivel" value="Principiante" />
 	</bean>
+<<<<<<< HEAD
 	<!-- Estilos -->
 	<bean id="estilo" class="domain.Estilo">
 		<property name="nombre" value="Salsa" />
 		<property name="descripcion" value="Mover el cuerpo" />
+=======
+	
+	<!-- Comentario de Antonio: teoricamente segun el txt deberia crear
+	un bean para Solicitud, pero solicitud no es una clase como tal sino una 
+	relacion entre curso y alumno no?? Asi que no tengo muy claro si deberia
+	crearlo realmente -->
+	<bean id="Socilicitud1" class="domain.Solicitud">
+		<property name="estado" value="PENDIENTE"/>
+		<property name="momento" value="04/05/2024"/>
+	</bean>
+
+	<bean id="Socilicitud2" class="domain.Solicitud">
+		<property name="estado" value="ACEPTADO"/>
+		<property name="momento" value="06/07/2024"/>
+>>>>>>> 0ba2e56b62a41df4b071b674d29a43e732417b7d
 	</bean>
 </beans>
