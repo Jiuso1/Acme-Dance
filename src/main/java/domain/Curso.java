@@ -16,7 +16,7 @@ public class Curso extends DomainEntity {
 	private Date	fechafin;
 	private String	diaSemana;
 	private int		hora;
-	private String	nivel;
+	private Nivel	nivel;
 
 
 	@NotBlank
@@ -58,10 +58,10 @@ public class Curso extends DomainEntity {
 		this.hora = hora;
 	}
 
-	public String getNivel() {
+	public Nivel getNivel() {
 		return this.nivel;
 	}
-	public void setNivel(final String nivel) {
+	public void setNivel(final Nivel nivel) {
 		this.nivel = nivel;
 	}
 

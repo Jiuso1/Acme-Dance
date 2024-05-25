@@ -14,13 +14,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Solicitud extends DomainEntity {
 
-	private Date		momento;
-	private EstadoCurso	estado;
-
-
-	public enum EstadoCurso {
-		PENDIENTE, ACEPTADO, RECHAZADO
-	}
+	private Date			momento;
+	private Estado_Curso	estado;
 
 
 	/**
@@ -44,7 +39,7 @@ public class Solicitud extends DomainEntity {
 	 * @return the estado
 	 */
 	@NotNull
-	public EstadoCurso getEstado() {
+	public Estado_Curso getEstado() {
 		return this.estado;
 	}
 
@@ -52,7 +47,7 @@ public class Solicitud extends DomainEntity {
 	 * @param estado
 	 *            the estado to set
 	 */
-	public void setEstado(final EstadoCurso estado) {
+	public void setEstado(final Estado_Curso estado) {
 		this.estado = estado;
 	}
 

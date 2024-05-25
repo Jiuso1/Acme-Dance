@@ -74,13 +74,21 @@
 		<property name="text" value="Help!" />
 	</bean>
 	<!-- Cursos -->
-	<bean id="curso1" class="domain.Curso">
-		<property name="titulo" value="Python en un finde" />
-		<property name="diaSemana" value="Martes" />
+	<bean id="curso2" class="domain.Curso">
+		<property name="titulo" value="C++ for dummies" />
+		<property name="diaSemana" value="Viernes" />
 		<property name="fechaini" value="01/03/2002" />
 		<property name="fechafin" value="01/05/2002" />
-		<property name="hora" value="10" />
-		<property name="nivel" value="Principiante" />
+		<property name="hora" value="14" />
+		<property name="nivel">
+			<value type="domain.Nivel">PRINCIPIANTE</value>
+		</property>
+	</bean>
+	
+	<!-- Estilos -->
+	<bean id="estilo1" class="domain.Estilo">
+		<property name="nombre" value="Salsa" />
+		<property name="descripcion" value="Bien latino" />
 	</bean>
 	
 	<!-- Comentario de Antonio: teoricamente segun el txt deberia crear
@@ -88,12 +96,16 @@
 	relacion entre curso y alumno no?? Asi que no tengo muy claro si deberia
 	crearlo realmente -->
 	<bean id="Socilicitud1" class="domain.Solicitud">
-		<property name="estado" value="PENDIENTE"/>
+		<property name="estado">
+			<value type="domain.Estado_Curso">PENDIENTE</value>
+		</property>
 		<property name="momento" value="04/05/2024"/>
 	</bean>
 
 	<bean id="Socilicitud2" class="domain.Solicitud">
-		<property name="estado" value="ACEPTADO"/>
+		<property name="estado">
+			<value type="domain.Estado_Curso">ACEPTADO</value>
+		</property>
 		<property name="momento" value="06/07/2024"/>
 	</bean>
 </beans>
