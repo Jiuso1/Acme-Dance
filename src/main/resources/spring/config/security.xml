@@ -52,6 +52,7 @@
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/curso/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/estilo/**" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

@@ -82,4 +82,9 @@
 		<property name="hora" value="10" />
 		<property name="nivel" value="Principiante" />
 	</bean>
+	<!-- Estilos -->
+	<bean id="estilo" class="domain.Estilo">
+		<property name="nombre" value="Salsa" />
+		<property name="descripcion" value="Mover el cuerpo" />
+	</bean>
 </beans>

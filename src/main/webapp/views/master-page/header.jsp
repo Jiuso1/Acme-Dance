@@ -72,6 +72,19 @@
 				</ul>
 			</li>
 		</security:authorize>
+		
+		<security:authorize access="isAuthenticated()">
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile.estilo" />
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li> <a href="estilo/list.do"><spring:message code="master.page.profile.estilo.list"></spring:message></a> </li>
+				</ul>
+			</li>
+		</security:authorize>
 	</ul>
 </div>
 
