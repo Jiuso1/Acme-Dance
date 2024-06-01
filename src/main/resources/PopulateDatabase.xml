@@ -25,19 +25,6 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password"
-			value="91ec1f9324753048c0096d036a694f86" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="super" />
 		<property name="password"
@@ -48,7 +35,10 @@
 					<property name="authority" value="ADMIN" />
 				</bean>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="ALUMNO" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="ACADEMIA" />
 				</bean>
 			</list>
 		</property>
@@ -84,28 +74,78 @@
 			<value type="domain.Nivel">PRINCIPIANTE</value>
 		</property>
 	</bean>
-	
+
 	<!-- Estilos -->
 	<bean id="estilo1" class="domain.Estilo">
 		<property name="nombre" value="Salsa" />
 		<property name="descripcion" value="Bien latino" />
 	</bean>
 	
-	<!-- Comentario de Antonio: teoricamente segun el txt deberia crear
-	un bean para Solicitud, pero solicitud no es una clase como tal sino una 
-	relacion entre curso y alumno no?? Asi que no tengo muy claro si deberia
-	crearlo realmente -->
-	<bean id="Socilicitud1" class="domain.Solicitud">
+	<bean id="academia0" class="domain.Academia">
+		<property name="id" value="0" />
+		<property name="version" value="0" />
+		<property name="nombre" value="Inicial" />
+		<property name="apellidos" value="Inicial" />
+		<property name="email" value="prueba@prueba.com" />
+		<property name="telefono" value="600000000" />
+		<property name="direccion" value="Dirección de prueba" />
+		<property name="rol" value="3" />
+		<property name="username" value="prueba" />
+		<property name="password"
+			value="c893bad68927b457dbed39460e6afd62" />
+		<property name="nombreComercial" value="Academia Inicial" />
+	</bean>
+	
+	<bean id="tutorial0" class="domain.Tutorial">
+		<property name="titulo" value="Como crackear Camtasia + Fraps 2013" />
+		<property name="descripcion" value="Para grabar minecraft" />
+		<property name="video" value="https://www.youtube.com/embed/g4Sdt7DTxTY?si=ubQqCpB_fvOibSdl" />
+		<property name="academia" ref="academia0" />
+	</bean>
+	
+	<bean id="alumno0" class="domain.Alumno">
+		<property name="id" value="0" />
+		<property name="version" value="0" />
+		<property name="nombre" value="Inicial" />
+		<property name="apellidos" value="Inicial" />
+		<property name="email" value="prueba@prueba.com" />
+		<property name="telefono" value="600000000" />
+		<property name="direccion" value="Dirección de prueba" />
+		<property name="rol" value="3" />
+		<property name="username" value="prueba" />
+		<property name="password"
+			value="c893bad68927b457dbed39460e6afd62" />
+	</bean>
+
+	<bean id="tarjeta0" class="domain.Tarjeta">
+				<property name="nombre" value="prueba" />
+				<property name="marca" value="prueba" />
+				<property name="mescad" value="8" />
+				<property name="anocad" value="2026" />
+				<property name="numero" value="4768556647125689" />
+				<property name="cvv" value="666" />
+				<property name="alumno" ref="alumno0" />
+	</bean>
+	
+	<!-- Solicitudes -->
+	
+	<bean id="socilicitud0" class="domain.Solicitud">
 		<property name="estado">
 			<value type="domain.Estado_Curso">PENDIENTE</value>
 		</property>
-		<property name="momento" value="04/05/2024"/>
+		<property name="momento" value="04/05/2024" />
+		<property name="alumno" ref="alumno0" />
+		<property name="curso" ref="curso2" />
 	</bean>
 
-	<bean id="Socilicitud2" class="domain.Solicitud">
+	<bean id="socilicitud1" class="domain.Solicitud">
 		<property name="estado">
 			<value type="domain.Estado_Curso">ACEPTADO</value>
 		</property>
-		<property name="momento" value="06/07/2024"/>
+		<property name="momento" value="06/07/2024" />
+		<property name="alumno" ref="alumno0" />
+		<property name="curso" ref="curso2" />
 	</bean>
+	
+
 </beans>

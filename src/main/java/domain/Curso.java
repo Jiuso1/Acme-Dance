@@ -2,8 +2,11 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -11,12 +14,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Curso extends DomainEntity {
 
-	private String	titulo;
-	private Date	fechaini;
-	private Date	fechafin;
-	private String	diaSemana;
-	private int		hora;
-	private Nivel	nivel;
+	private String			titulo;
+	private Date			fechaini;
+	private Date			fechafin;
+	private String			diaSemana;
+	private int				hora;
+	private Nivel			nivel;
+	private List<Solicitud>	solicitudes;
 
 
 	@NotBlank
@@ -63,6 +67,15 @@ public class Curso extends DomainEntity {
 	}
 	public void setNivel(final Nivel nivel) {
 		this.nivel = nivel;
+	}
+
+	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+	public List<Solicitud> getSolicitudes() {
+		return this.solicitudes;
+	}
+
+	public void setSolicitudes(final List<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
 	}
 
 }

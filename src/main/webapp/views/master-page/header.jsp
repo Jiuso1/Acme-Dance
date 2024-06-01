@@ -44,6 +44,10 @@
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
+		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv" href="register/register.do"><spring:message code="master.page.register" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="isAuthenticated()">
 			<li>
 				<a class="fNiv"> 
@@ -69,6 +73,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="curso/list.do"><spring:message code="master.page.profile.curso.list"></spring:message></a> </li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li> <a href="curso/create.do"><spring:message code="master.page.profile.curso.create"></spring:message></a> </li>
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>
@@ -82,6 +89,19 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="estilo/list.do"><spring:message code="master.page.profile.estilo.list"></spring:message></a> </li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="isAuthenticated()">
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile.tutorial" />
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li> <a href="tutorial/list.do"><spring:message code="master.page.profile.tutorial.list"></spring:message></a> </li>
 				</ul>
 			</li>
 		</security:authorize>

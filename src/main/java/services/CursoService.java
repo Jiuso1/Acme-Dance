@@ -26,4 +26,8 @@ public class CursoService {
 		return result;
 	}
 
+	public void save(final Curso curso) {
+		this.cursoRepository.save(curso);
+	}
+
 }

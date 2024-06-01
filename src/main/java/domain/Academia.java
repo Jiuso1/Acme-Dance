@@ -1,7 +1,11 @@
 
 package domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -9,17 +13,26 @@ import org.hibernate.validator.constraints.NotBlank;
 //@Access(AcessType.PROPERTY)
 public class Academia extends Actor {
 
-	private String Nombre_Comercial;
+	private String			nombreComercial;
+	private Set<Tutorial>	tutoriales;
 
 
 	@NotBlank
 	public String getNombreComercial() {
-		return this.Nombre_Comercial;
+		return this.nombreComercial;
 	}
 
-	@NotBlank
-	public void setNombreComercial(final String Nombre_Comercial) {
-		this.Nombre_Comercial = Nombre_Comercial;
+	public void setNombreComercial(final String nombreComercial) {
+		this.nombreComercial = nombreComercial;
+	}
+
+	@OneToMany(mappedBy = "academia", cascade = CascadeType.ALL)
+	public Set<Tutorial> getTutoriales() {
+		return this.tutoriales;
+	}
+
+	public void setTutoriales(final Set<Tutorial> tutoriales) {
+		this.tutoriales = tutoriales;
 	}
 
 }
