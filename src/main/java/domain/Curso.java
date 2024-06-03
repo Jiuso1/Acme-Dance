@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -21,6 +23,8 @@ public class Curso extends DomainEntity {
 	private int				hora;
 	private Nivel			nivel;
 	private List<Solicitud>	solicitudes;
+	private Estilo			estilo;
+	private Academia		academia;
 
 
 	@NotBlank
@@ -76,6 +80,27 @@ public class Curso extends DomainEntity {
 
 	public void setSolicitudes(final List<Solicitud> solicitudes) {
 		this.solicitudes = solicitudes;
+	}
+	@Valid
+	@ManyToOne(optional = true)
+	public Estilo getEstilo() {
+		return this.estilo;
+	}
+	public void setEstilo(final Estilo estilo) {
+		this.estilo = estilo;
+	}
+	@Valid
+	@ManyToOne(optional = true)
+	public Academia getAcademia() {
+		return this.academia;
+	}
+	public void setAcademia(final Academia academia) {
+		this.academia = academia;
+	}
+
+	@Override
+	public String toString() {
+		return this.titulo;
 	}
 
 }

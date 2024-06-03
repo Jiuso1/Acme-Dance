@@ -1,15 +1,16 @@
 #./src/main/resources/Entities.map
-#Sat Jun 01 18:46:22 CEST 2024
-socilicitud1=26
-socilicitud0=25
-shout3=18
-shout2=17
-tutorial0=22
-shout1=16
-alumno0=23
-academia0=21
-estilo1=20
-tarjeta0=24
-curso2=19
-userAccount3=15
-userAccount1=14
+#Mon Jun 03 02:24:02 CEST 2024
+shout3=20
+shout2=19
+tutorial0=26
+shout1=18
+solicitud1=23
+alumno0=27
+academia0=25
+solicitud0=22
+estilo1=24
+tarjeta0=28
+curso2=21
+userAccount3=17
+userAccount2=16
+userAccount1=15

@@ -55,6 +55,7 @@
 		<security:intercept-url pattern="/curso/create.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/estilo/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/tutorial/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/solicitud/**" access="hasRole('ALUMNO')" />
 		
 		<security:intercept-url pattern="/register/**" access="permitAll" />
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

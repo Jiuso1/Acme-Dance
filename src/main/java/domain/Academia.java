@@ -1,7 +1,7 @@
 
 package domain;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,7 +14,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Academia extends Actor {
 
 	private String			nombreComercial;
-	private Set<Tutorial>	tutoriales;
+	private List<Tutorial>	tutoriales;
+	private List<Curso>		cursos;
 
 
 	@NotBlank
@@ -27,12 +28,25 @@ public class Academia extends Actor {
 	}
 
 	@OneToMany(mappedBy = "academia", cascade = CascadeType.ALL)
-	public Set<Tutorial> getTutoriales() {
+	public List<Tutorial> getTutoriales() {
 		return this.tutoriales;
 	}
 
-	public void setTutoriales(final Set<Tutorial> tutoriales) {
+	public void setTutoriales(final List<Tutorial> tutoriales) {
 		this.tutoriales = tutoriales;
+	}
+	@OneToMany(mappedBy = "academia", cascade = CascadeType.ALL)
+	public List<Curso> getCursos() {
+		return this.cursos;
+	}
+
+	public void setCursos(final List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	@Override
+	public String toString() {
+		return this.nombreComercial;
 	}
 
 }

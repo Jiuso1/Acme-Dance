@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -42,7 +43,8 @@ public class Tutorial extends DomainEntity {
 		this.video = video;
 	}
 
-	@ManyToOne
+	@Valid
+	@ManyToOne(optional = false)
 	public Academia getAcademia() {
 		return this.academia;
 	}

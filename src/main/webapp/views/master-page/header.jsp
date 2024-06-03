@@ -80,7 +80,7 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="isAuthenticated()">
+		<security:authorize access="hasRole('ADMIN')">
 			<li>
 				<a class="fNiv">
 					<spring:message code="master.page.profile.estilo" />
@@ -102,6 +102,19 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="tutorial/list.do"><spring:message code="master.page.profile.tutorial.list"></spring:message></a> </li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('ALUMNO')">
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile.solicitudes" />
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li> <a href="solicitud/list.do"><spring:message code="master.page.profile.solicitudes.list"></spring:message></a> </li>
 				</ul>
 			</li>
 		</security:authorize>

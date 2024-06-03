@@ -39,5 +39,11 @@
 	
 	<spring:message code="curso.nivel" var="nivelHeader" />
 	<display:column property="nivel" title="${nivelHeader}" sortable="true" />
+	
+	<spring:message code="curso.estilo" var="estiloHeader" />
+	<display:column property="estilo" title="${estiloHeader}" sortable="true" />
+	
+	<spring:message code="curso.academia" var="academiaHeader" />
+	<display:column property="academia" title="${academiaHeader}" sortable="true" />
 
 </display:table>

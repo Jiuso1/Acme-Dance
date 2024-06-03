@@ -1,30 +1,48 @@
+
 package domain;
 
-import javax.persistence.Access;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 //@Access(AccessType.PROPERTY)
 public class Estilo extends DomainEntity {
-	
-	private String nombre;
-	private String descripcion;
-	
+
+	private String		nombre;
+	private String		descripcion;
+	private List<Curso>	cursos;
+
+
 	@NotBlank
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	@NotBlank
-	public void setNombre(String nombre) {
+	public void setNombre(final String nombre) {
 		this.nombre = nombre;
 	}
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
-	public void setDescripcion(String descripcion) {
+	public void setDescripcion(final String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+	@OneToMany(mappedBy = "estilo", cascade = CascadeType.ALL)
+	public List<Curso> getCursos() {
+		return this.cursos;
+	}
+	public void setCursos(final List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+
 }

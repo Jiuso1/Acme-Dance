@@ -26,6 +26,14 @@ public class AlumnoService {
 		return result;
 	}
 
+	public Collection<Alumno> findByUsername(final String username) {
+		Collection<Alumno> result;
+
+		result = this.alumnoRepository.findByUsername(username);
+
+		return result;
+	}
+
 	public void save(final Alumno alumno) {
 		this.alumnoRepository.save(alumno);
 	}
