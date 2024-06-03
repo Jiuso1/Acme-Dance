@@ -10,6 +10,7 @@
 
 package security;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
@@ -51,6 +54,20 @@ public class LoginController extends AbstractController {
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);
 
+		return result;
+	}
+
+	@RequestMapping("/logout")
+	public ModelAndView logout(@Valid final Credentials credentials, final BindingResult bindingResult, @RequestParam(required = false) final boolean showError) {
+		Assert.notNull(credentials);
+		Assert.notNull(bindingResult);
+		ModelAndView result;
+		final ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		final HttpSession session = attr.getRequest().getSession(true);
+		session.invalidate();
+		result = new ModelAndView("redirect:login.do");
+		result.addObject("credentials", credentials);
+		result.addObject("showError", showError);
 		return result;
 	}
 

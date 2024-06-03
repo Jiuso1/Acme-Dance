@@ -118,6 +118,11 @@
 				</ul>
 			</li>
 		</security:authorize>
+		
+		<security:authorize access="isAuthenticated()">
+			<li><a class="fNiv" href="security/logout.do"><spring:message code="master.page.logout" /></a></li>
+		</security:authorize>
+		
 	</ul>
 </div>
 
