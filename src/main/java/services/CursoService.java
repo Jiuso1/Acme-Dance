@@ -35,6 +35,14 @@ public class CursoService {
 		return result;
 	}
 
+	public Collection<Curso> findById(final int id) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findById(id);
+
+		return result;
+	}
+
 	public void save(final Curso curso) {
 		this.cursoRepository.save(curso);
 	}

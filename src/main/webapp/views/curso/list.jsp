@@ -45,5 +45,15 @@
 	
 	<spring:message code="curso.academia" var="academiaHeader" />
 	<display:column property="academia" title="${academiaHeader}" sortable="true" />
+	
+	<security:authorize access="hasRole('ALUMNO')">
+
+		<display:column>
+			<a href="curso/request.do?cursoId=${row.id}">
+				<spring:message	code="curso.solicitar" />
+			</a>
+		</display:column>
+				
+	</security:authorize>
 
 </display:table>

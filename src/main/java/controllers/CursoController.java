@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,25 +12,35 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Academia;
+import domain.Alumno;
 import domain.Curso;
+import domain.Estado_Curso;
 import domain.Nivel;
+import domain.Solicitud;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import services.AcademiaService;
+import services.AlumnoService;
 import services.CursoService;
+import services.SolicitudService;
 
 @Controller
 @RequestMapping("/curso")
 public class CursoController extends AbstractController {
 
 	@Autowired
-	private CursoService	cursoService;
+	private CursoService		cursoService;
 	@Autowired
-	private AcademiaService	academiaService;
+	private AcademiaService		academiaService;
+	@Autowired
+	private AlumnoService		alumnoService;
+	@Autowired
+	private SolicitudService	solicitudService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -92,6 +103,47 @@ public class CursoController extends AbstractController {
 			result = new ModelAndView("redirect:create.do");
 			result.addObject("curso", curso);
 			result.addObject("message", "curso.commit.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/request", method = RequestMethod.GET)
+	public ModelAndView request(@RequestParam final int cursoId) {
+		ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final List<Alumno> alumnos = (List<Alumno>) this.alumnoService.findByUsername(user.getUsername());
+		final Alumno a = alumnos.get(0);
+		final List<Curso> cs = (List<Curso>) this.cursoService.findById(cursoId);
+		final Curso c = cs.get(0);
+		final Solicitud s = new Solicitud();
+		s.setEstado(Estado_Curso.PENDIENTE);
+		s.setMomento(new Date());
+		s.setCurso(c);
+		s.setAlumno(a);
+		List<Solicitud> solicitudes = c.getSolicitudes();
+		if (solicitudes == null)
+			solicitudes = new ArrayList<Solicitud>();
+		solicitudes.add(s);
+		c.setSolicitudes(solicitudes);
+		List<Solicitud> solicitudesa = a.getSolicitudes();
+		if (solicitudesa == null)
+			solicitudesa = new ArrayList<Solicitud>();
+		solicitudesa.add(s);
+		a.setSolicitudes(solicitudesa);
+		try {
+			while (this.solicitudService.countByAlumnoAndCurso(a, c) < 1)
+				this.solicitudService.save(s);
+			this.cursoService.save(c);
+			this.alumnoService.save(a);
+			result = new ModelAndView("redirect:/solicitud/list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("curso", c);
+			result.addObject("message", "curso.commit.error");
+			result.addObject("alumno", a);
+			result.addObject("message", "alumno.commit.error");
+			result.addObject("solicitud", s);
+			result.addObject("message", "solicitud.commit.error");
 		}
 		return result;
 	}
