@@ -58,6 +58,32 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="prueba.academia" />
+		<property name="password"
+			value="c893bad68927b457dbed39460e6afd62" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ACADEMIA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="bailoteos.garcia" />
+		<property name="password"
+			value="c893bad68927b457dbed39460e6afd62" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ACADEMIA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Other domain beans come here -->
 	<!-- Shouts -->
@@ -79,6 +105,24 @@
 		<property name="text" value="Help!" />
 	</bean>
 	<!-- Cursos -->
+	<bean id="curso1" class="domain.Curso">
+		<property name="titulo" value="Historia del flamenco" />
+		<property name="diaSemana" value="Jueves" />
+		<property name="fechaini" value="01/03/2025" />
+		<property name="fechafin" value="01/05/2025" />
+		<property name="hora" value="17" />
+		<property name="nivel">
+			<value type="domain.Nivel">INTERMEDIO</value>
+		</property>
+		<property name="estilo" ref="estilo2"></property>
+		<property name="solicitudes">
+			<list>
+				
+			</list>
+		</property>
+		<property name="academia" ref="academia1"></property>
+	</bean>
+	
 	<bean id="curso2" class="domain.Curso">
 		<property name="titulo" value="C++ for dummies" />
 		<property name="diaSemana" value="Viernes" />
@@ -108,6 +152,16 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="estilo2" class="domain.Estilo">
+		<property name="nombre" value="Flamenco" />
+		<property name="descripcion" value="Bien andaluz" />
+		<property name="cursos">
+			<list>
+				<ref bean="curso1" />
+			</list>
+		</property>
+	</bean>
 
 	<bean id="academia0" class="domain.Academia">
 		<property name="id" value="0" />
@@ -125,6 +179,26 @@
 		<property name="cursos">
 			<list>
 				<ref bean="curso2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="academia1" class="domain.Academia">
+		<property name="id" value="1" />
+		<property name="version" value="0" />
+		<property name="nombre" value="Bailoteos" />
+		<property name="apellidos" value="García" />
+		<property name="email" value="bailoteos@garcia.com" />
+		<property name="telefono" value="699999999" />
+		<property name="direccion" value="Dirección chunga" />
+		<property name="rol" value="3" />
+		<property name="username" value="bailoteos.garcia" />
+		<property name="password"
+			value="c893bad68927b457dbed39460e6afd62" />
+		<property name="nombreComercial" value="Bailoteos García" />
+		<property name="cursos">
+			<list>
+				<ref bean="curso1" />
 			</list>
 		</property>
 	</bean>

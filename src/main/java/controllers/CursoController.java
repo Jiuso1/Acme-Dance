@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Academia;
 import domain.Curso;
 import domain.Nivel;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import services.AcademiaService;
 import services.CursoService;
 
 @Controller
@@ -21,17 +27,37 @@ import services.CursoService;
 public class CursoController extends AbstractController {
 
 	@Autowired
-	private CursoService cursoService;
+	private CursoService	cursoService;
+	@Autowired
+	private AcademiaService	academiaService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Curso> cursos;
-		cursos = this.cursoService.findAll();
-		result = new ModelAndView("curso/list");
-		result.addObject("requestURI", "curso/list.do");
-		result.addObject("cursos", cursos);
+		final UserAccount user = LoginService.getPrincipal();
+		final List<Authority> authorities = (List<Authority>) user.getAuthorities();
+		boolean b = false;
+		int i = 0;
+		while (b == false && i < authorities.size())
+			if (authorities.get(i).getAuthority().equals("ACADEMIA"))
+				b = true;
+			else
+				i++;
+		if (b == true) {
+			final List<Academia> academias = (List<Academia>) this.academiaService.findByUsername(user.getUsername());
+			final Academia academia = academias.get(0);
+			cursos = this.cursoService.findByAcademia(academia);
+			result = new ModelAndView("curso/list");
+			result.addObject("requestURI", "curso/list.do");
+			result.addObject("cursos", cursos);
+		} else {
+			cursos = this.cursoService.findAll();
+			result = new ModelAndView("curso/list");
+			result.addObject("requestURI", "curso/list.do");
+			result.addObject("cursos", cursos);
+		}
 		return result;
 	}
 

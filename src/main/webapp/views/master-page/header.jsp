@@ -73,7 +73,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="curso/list.do"><spring:message code="master.page.profile.curso.list"></spring:message></a> </li>
-					<security:authorize access="hasRole('ADMIN')">
+					<security:authorize access="hasRole('ACADEMIA')">
 						<li> <a href="curso/create.do"><spring:message code="master.page.profile.curso.create"></spring:message></a> </li>
 					</security:authorize>
 				</ul>

@@ -26,6 +26,14 @@ public class AcademiaService {
 		return result;
 	}
 
+	public Collection<Academia> findByUsername(final String username) {
+		Collection<Academia> result;
+
+		result = this.academiaRepository.findByUsername(username);
+
+		return result;
+	}
+
 	public void save(final Academia academia) {
 		this.academiaRepository.save(academia);
 	}

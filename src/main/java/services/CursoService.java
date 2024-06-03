@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import domain.Academia;
 import domain.Curso;
 import repositories.CursoRepository;
 
@@ -22,6 +23,14 @@ public class CursoService {
 		Collection<Curso> result;
 
 		result = this.cursoRepository.findAll();
+
+		return result;
+	}
+
+	public Collection<Curso> findByAcademia(final Academia a) {
+		Collection<Curso> result;
+
+		result = this.cursoRepository.findByAcademia(a);
 
 		return result;
 	}
