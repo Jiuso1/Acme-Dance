@@ -19,7 +19,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="curso/create.do" method="POST" modelAttribute="curso">
+<form:form action="curso/editCurso.do" method="POST" modelAttribute="curso">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:label path="titulo">
@@ -69,7 +69,7 @@
 	<form:hidden path="estilo" />
 	
 	<input type="submit" name="save"
-		value="<spring:message code="curso.save" />" />&nbsp;
+		value="<spring:message code="curso.edit" />" />&nbsp;
 	<input type="button" name="cancel"
 		value="<spring:message code="curso.cancel" />"
 		onclick="javascript: relativeRedir('curso/list.do');" />

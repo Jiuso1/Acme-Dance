@@ -40,5 +40,20 @@
             </c:otherwise>
         </c:choose>
     </display:column>
+    
+    <security:authorize access="hasRole('ACADEMIA')">
+    <display:column>
+			<a href="tutorial/deleteTutorial.do?tutorialId=${row.id}" method="GET">
+				<spring:message	code="tutorial.borrarTutorial" />
+			</a>
+		</display:column>
+
+			<display:column>
+			<a href="tutorial/editTutorial.do?tutorialId=${row.id}" method="GET">
+				<spring:message	code="tutorial.editTutorial" />
+			</a>
+		</display:column>
+	</security:authorize>
+
 
 </display:table>

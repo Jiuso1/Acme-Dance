@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,7 +21,7 @@ public class Curso extends DomainEntity {
 	private Date			fechaini;
 	private Date			fechafin;
 	private String			diaSemana;
-	private int				hora;
+	private String			hora;
 	private Nivel			nivel;
 	private List<Solicitud>	solicitudes;
 	private Estilo			estilo;
@@ -59,10 +60,11 @@ public class Curso extends DomainEntity {
 		this.diaSemana = diaSemana;
 	}
 
-	public int getHora() {
+	@Pattern(regexp = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$")
+	public String getHora() {
 		return this.hora;
 	}
-	public void setHora(final int hora) {
+	public void setHora(final String hora) {
 		this.hora = hora;
 	}
 
@@ -90,7 +92,7 @@ public class Curso extends DomainEntity {
 		this.estilo = estilo;
 	}
 	@Valid
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public Academia getAcademia() {
 		return this.academia;
 	}

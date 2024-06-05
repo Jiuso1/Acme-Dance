@@ -7,6 +7,7 @@ public class Ayuda {
 
 	private int				a;
 	private Estado_Curso	estado;
+	private String			estilo;
 
 
 	public Ayuda() {
@@ -27,5 +28,13 @@ public class Ayuda {
 
 	public void setEstado(final Estado_Curso estado) {
 		this.estado = estado;
+	}
+
+	public String getEstilo() {
+		return this.estilo;
+	}
+
+	public void setEstilo(final String estilo) {
+		this.estilo = estilo;
 	}
 }

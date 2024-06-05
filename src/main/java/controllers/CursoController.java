@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ayuda.Ayuda;
 import domain.Academia;
 import domain.Alumno;
 import domain.Curso;
 import domain.Estado_Curso;
+import domain.Estilo;
 import domain.Nivel;
 import domain.Solicitud;
 import security.Authority;
@@ -27,6 +29,7 @@ import security.UserAccount;
 import services.AcademiaService;
 import services.AlumnoService;
 import services.CursoService;
+import services.EstiloService;
 import services.SolicitudService;
 
 @Controller
@@ -41,10 +44,14 @@ public class CursoController extends AbstractController {
 	private AlumnoService		alumnoService;
 	@Autowired
 	private SolicitudService	solicitudService;
+	@Autowired
+	private EstiloService		estiloService;
+
+	private int					cursoId	= -1;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@ModelAttribute("ayuda") final Ayuda sol, final BindingResult bindingResult) {
 		ModelAndView result;
 		Collection<Curso> cursos;
 		final UserAccount user = LoginService.getPrincipal();
@@ -60,9 +67,11 @@ public class CursoController extends AbstractController {
 			final List<Academia> academias = (List<Academia>) this.academiaService.findByUsername(user.getUsername());
 			final Academia academia = academias.get(0);
 			cursos = this.cursoService.findByAcademia(academia);
+			final List<Estilo> estilos = (List<Estilo>) this.estiloService.findAll();
 			result = new ModelAndView("curso/list");
 			result.addObject("requestURI", "curso/list.do");
 			result.addObject("cursos", cursos);
+			result.addObject("estilos", estilos);
 		} else {
 			cursos = this.cursoService.findAll();
 			result = new ModelAndView("curso/list");
@@ -80,23 +89,41 @@ public class CursoController extends AbstractController {
 		niveles.add(Nivel.INTERMEDIO);
 		niveles.add(Nivel.AVANZADO);
 		niveles.add(Nivel.PROFESIONAL);
+
+		final Collection<Estilo> estilos = this.estiloService.findAll();
+
+		/*
+		 * final Collection<String> estilos = new ArrayList<String>();
+		 * for (int i = 0; i < estilosCompletos.size(); i++)
+		 * estilos.add(estilosCompletos.get(i).getNombre());
+		 */
+
 		result = new ModelAndView("curso/create");
 		result.addObject("requestURI", "curso/create.do");
 		result.addObject("niveles", niveles);
+		result.addObject("estilos", estilos);
 		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ModelAndView save(@ModelAttribute("curso") final Curso c, final BindingResult bindingResult) {
 		ModelAndView result;
+		final UserAccount user = LoginService.getPrincipal();
+		final List<Academia> academias = (List<Academia>) this.academiaService.findByUsername(user.getUsername());
+		final Academia a = academias.get(0);
 		final Curso curso = new Curso();
 		curso.setTitulo(c.getTitulo());
-		curso.setFechaini(c.getFechaini());
-		curso.setFechafin(c.getFechafin());
 		curso.setDiaSemana(c.getDiaSemana());
 		curso.setHora(c.getHora());
 		curso.setNivel(c.getNivel());
+		curso.setFechaini(c.getFechaini());
+		curso.setFechafin(c.getFechafin());
+		curso.setAcademia(a);
+
+		System.out.println("Estilo: " + c.getEstilo());
+		curso.setEstilo(c.getEstilo());
 		try {
+
 			this.cursoService.save(curso);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
@@ -116,6 +143,7 @@ public class CursoController extends AbstractController {
 		final List<Curso> cs = (List<Curso>) this.cursoService.findById(cursoId);
 		final Curso c = cs.get(0);
 		final Solicitud s = new Solicitud();
+		//final Estilo estilo = this.estiloService.findByName(name)
 		s.setEstado(Estado_Curso.PENDIENTE);
 		s.setMomento(new Date());
 		s.setCurso(c);
@@ -148,4 +176,82 @@ public class CursoController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/deleteCurso", method = RequestMethod.GET)
+	public ModelAndView deleteCourse(@RequestParam final int cursoId) {
+		ModelAndView result;
+
+		this.cursoService.delete(cursoId);
+		result = new ModelAndView("redirect:list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editCurso", method = RequestMethod.GET)
+	public ModelAndView createEdit(@RequestParam final int cursoId) {
+		ModelAndView result;
+
+		final List<Curso> cursos = (List<Curso>) this.cursoService.findById(cursoId);
+		final Curso curso = cursos.get(0);
+
+		this.cursoId = cursoId;
+
+		result = new ModelAndView("curso/edit");
+		result.addObject("requestURI", "curso/editCurso.do");
+		result.addObject("curso", curso);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/editCurso", method = RequestMethod.POST)
+	public ModelAndView saveEdit(@ModelAttribute("curso") final Curso c, final BindingResult bindingResult) {
+		ModelAndView result;
+
+		final List<Curso> cursos = (List<Curso>) this.cursoService.findById(this.cursoId);
+		final Curso curso = cursos.get(0);
+
+		curso.setTitulo(c.getTitulo());
+		curso.setFechaini(c.getFechaini());
+		curso.setFechafin(c.getFechafin());
+		curso.setDiaSemana(c.getDiaSemana());
+		curso.setHora(c.getHora());
+		curso.setNivel(c.getNivel());
+
+		//estilo.setCursos();
+
+		this.cursoId = -1;
+
+		try {
+
+			this.cursoService.save(curso);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("curso", curso);
+			result.addObject("message", "tutorial.commit.error");
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/giveEstilo", method = RequestMethod.POST)
+	public ModelAndView giveEstilo(@ModelAttribute("ayuda") final Ayuda sol, @RequestParam final int cursoId, final BindingResult bindingResult) {
+		ModelAndView result;
+
+		final List<Curso> cursos = (List<Curso>) this.cursoService.findById(cursoId);
+		final Curso curso = cursos.get(0);
+		final List<Estilo> estilos = (List<Estilo>) this.estiloService.findByName(sol.getEstilo());
+		final Estilo estilo = estilos.get(0);
+
+		curso.setEstilo(estilo);
+
+		try {
+			this.cursoService.save(curso);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("curso", curso);
+			result.addObject("message", "curso.commit.error");
+		}
+
+		return result;
+	}
 }

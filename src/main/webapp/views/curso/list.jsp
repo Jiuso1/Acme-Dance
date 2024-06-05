@@ -55,5 +55,35 @@
 		</display:column>
 				
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ACADEMIA')">
+
+		<display:column>
+			<form:form action="curso/giveEstilo.do?cursoId=${row.id}" method="POST" modelAttribute="ayuda">
+			<form:hidden path="a" />
+			<form:hidden path="estado" />
+				<form:label path="estilo">
+						<spring:message code="curso.estilo" />:
+					</form:label>
+					<form:select id="estilos" path="estilo">
+						<form:options items="${estilos}" />
+					</form:select>
+				<input type="submit" name="save" value="<spring:message code="curso.save" />" />&nbsp;
+			</form:form>
+		</display:column>
+		
+		<display:column>
+			<a href="curso/deleteCurso.do?cursoId=${row.id}" method="GET">
+				<spring:message	code="curso.borrarCurso" />
+			</a>
+		</display:column>
+		
+		<display:column>
+			<a href="curso/editCurso.do?cursoId=${row.id}" method="GET">
+				<spring:message	code="curso.editCurso" />
+			</a>
+		</display:column>
+				
+	</security:authorize>
 
 </display:table>

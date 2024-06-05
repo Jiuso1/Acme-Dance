@@ -25,4 +25,28 @@ public class EstiloService {
 
 		return result;
 	}
+
+	public Collection<Estilo> findByName(final String name) {
+		Collection<Estilo> result;
+
+		result = this.estiloRepository.findByName(name);
+
+		return result;
+	}
+
+	public Collection<Estilo> findById(final int id) {
+		Collection<Estilo> result;
+
+		result = this.estiloRepository.findById(id);
+
+		return result;
+	}
+
+	public void delete(final int id) {
+		this.estiloRepository.delete(id);
+	}
+
+	public void save(final Estilo estilo) {
+		this.estiloRepository.save(estilo);
+	}
 }

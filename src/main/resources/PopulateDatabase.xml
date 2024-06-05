@@ -110,7 +110,7 @@
 		<property name="diaSemana" value="Jueves" />
 		<property name="fechaini" value="01/03/2025" />
 		<property name="fechafin" value="01/05/2025" />
-		<property name="hora" value="17" />
+		<property name="hora" value="17:00" />
 		<property name="nivel">
 			<value type="domain.Nivel">INTERMEDIO</value>
 		</property>
@@ -128,7 +128,7 @@
 		<property name="diaSemana" value="Viernes" />
 		<property name="fechaini" value="01/03/2002" />
 		<property name="fechafin" value="01/05/2002" />
-		<property name="hora" value="14" />
+		<property name="hora" value="14:00" />
 		<property name="nivel">
 			<value type="domain.Nivel">PRINCIPIANTE</value>
 		</property>

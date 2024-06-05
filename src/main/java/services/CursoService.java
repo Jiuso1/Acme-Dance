@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import domain.Academia;
 import domain.Curso;
+import domain.Estilo;
 import repositories.CursoRepository;
 
 @Service
@@ -47,4 +48,15 @@ public class CursoService {
 		this.cursoRepository.save(curso);
 	}
 
+	public void delete(final int id) {
+		this.cursoRepository.delete(id);
+	}
+
+	public int countCoursesByStyle(final Estilo estilo) {
+		int result;
+
+		result = this.cursoRepository.countCoursesByStyle(estilo);
+
+		return result;
+	}
 }

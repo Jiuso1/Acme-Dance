@@ -55,8 +55,17 @@
 		<security:intercept-url pattern="/curso/list.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/curso/request.do" access="hasRole('ALUMNO')" />
 		<security:intercept-url pattern="/curso/create.do" access="hasRole('ACADEMIA')" />
-		<security:intercept-url pattern="/estilo/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/curso/editCurso.do" access="hasRole('ACADEMIA')" />
+		<security:intercept-url pattern="/curso/giveEstilo.do" access="hasRole('ACADEMIA')" />
+		<security:intercept-url pattern="/curso/deleteCurso.do" access="hasRole('ACADEMIA')" />
+		<security:intercept-url pattern="/estilo/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/estilo/create.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/estilo/editEstilo.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/estilo/deleteEstilo.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/tutorial/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/tutorial/create.do" access="hasRole('ACADEMIA')" />
+		<security:intercept-url pattern="/tutorial/edit.do" access="hasRole('ACADEMIA')" />
+		<security:intercept-url pattern="/tutorial/deleteTutorial.do" access="hasRole('ACADEMIA')" />
 		<security:intercept-url pattern="/solicitud/**" access="isAuthenticated()" />
 		
 		<security:intercept-url pattern="/register/**" access="permitAll" />

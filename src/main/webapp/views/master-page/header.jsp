@@ -89,6 +89,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="estilo/list.do"><spring:message code="master.page.profile.estilo.list"></spring:message></a> </li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li> <a href="estilo/create.do"><spring:message code="master.page.profile.estilo.create"></spring:message></a> </li>
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>
@@ -102,6 +105,9 @@
 				<ul>
 					<li class="arrow"></li>
 					<li> <a href="tutorial/list.do"><spring:message code="master.page.profile.tutorial.list"></spring:message></a> </li>
+					<security:authorize access="hasRole('ACADEMIA')">
+						<li> <a href="tutorial/create.do"><spring:message code="master.page.profile.tutorial.create"></spring:message></a> </li>
+					</security:authorize>
 				</ul>
 			</li>
 		</security:authorize>

@@ -44,14 +44,8 @@ public class SolicitudController extends AbstractController {
 		final Collection<Solicitud> solicitudes;
 		final UserAccount user = LoginService.getPrincipal();
 		final List<Authority> authorities = (List<Authority>) user.getAuthorities();
-		boolean b = false;
-		int i = 0;
-		while (b == false && i < authorities.size())
-			if (authorities.get(i).getAuthority().equals("ACADEMIA"))
-				b = true;
-			else
-				i++;
-		if (b == true) {
+		final boolean b = false;
+		if (authorities.get(0).getAuthority().equals("ACADEMIA")) {
 			final List<Academia> academias = (List<Academia>) this.academiaService.findByUsername(user.getUsername());
 			final Academia academia = academias.get(0);
 			solicitudes = this.solicitudService.findByAcademia(academia);
@@ -63,13 +57,19 @@ public class SolicitudController extends AbstractController {
 			result.addObject("requestURI", "solicitud/list.do");
 			result.addObject("solicitudes", solicitudes);
 			result.addObject("estados", estados);
-		} else {
+		} else if (authorities.get(0).getAuthority().equals("ALUMNO")) {
 			final List<Alumno> al = (List<Alumno>) this.alumnoService.findByUsername(user.getUsername());
 			solicitudes = this.solicitudService.findByAlumno(al.get(0));
 			result = new ModelAndView("solicitud/list");
 			result.addObject("requestURI", "solicitud/list.do");
 			result.addObject("solicitudes", solicitudes);
+		} else {
+			solicitudes = this.solicitudService.findAll();
+			result = new ModelAndView("solicitud/list");
+			result.addObject("requestURI", "solicitud/list.do");
+			result.addObject("solicitudes", solicitudes);
 		}
+
 		return result;
 	}
 

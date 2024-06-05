@@ -45,6 +45,7 @@
 				<form:select id="estados" path="estado">
 					<form:options items="${estados}" />
 				</form:select>
+				<form:hidden path="estilo" />
 				<form:errors cssClass="error" path="estado" />
 				<br />
 				<input type="submit" name="save" value="<spring:message code="solicitud.save" />" />&nbsp;

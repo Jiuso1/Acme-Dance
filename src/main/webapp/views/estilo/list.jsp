@@ -27,5 +27,19 @@
 
 	<spring:message code="estilo.descripcion" var="descripcionHeader" />
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="true" />
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<display:column>
+			<a href="estilo/deleteEstilo.do?estiloId=${row.id}" method="GET">
+				<spring:message	code="estilo.borrarEstilo" />
+			</a>
+		</display:column>
+		
+		<display:column>
+			<a href="estilo/editEstilo.do?styleId=${row.id}" method="GET">
+				<spring:message	code="estilo.editEstilo" />
+			</a>
+		</display:column>
+	</security:authorize>
 
 </display:table>
