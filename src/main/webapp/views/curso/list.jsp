@@ -73,13 +73,13 @@
 		</display:column>
 		
 		<display:column>
-			<a href="curso/deleteCurso.do?cursoId=${row.id}" method="GET">
+			<a href="curso/deleteCurso.do?cursoId=${row.id}" >
 				<spring:message	code="curso.borrarCurso" />
 			</a>
 		</display:column>
 		
 		<display:column>
-			<a href="curso/editCurso.do?cursoId=${row.id}" method="GET">
+			<a href="curso/editCurso.do?cursoId=${row.id}" >
 				<spring:message	code="curso.editCurso" />
 			</a>
 		</display:column>

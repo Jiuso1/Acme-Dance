@@ -30,16 +30,6 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-		</security:authorize>
-		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
@@ -80,11 +70,41 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('ADMIN')">
+		<security:authorize access="isAnonymous()">
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile.curso" />
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li> <a href="curso/listForAnonymous.do"><spring:message code="master.page.profile.curso.list"></spring:message></a> </li>
+					<security:authorize access="hasRole('ACADEMIA')">
+						<li> <a href="curso/create.do"><spring:message code="master.page.profile.curso.create"></spring:message></a> </li>
+					</security:authorize>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="isAuthenticated()">
 			<li>
 				<a class="fNiv">
 					<spring:message code="master.page.profile.estilo" />
 			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li> <a href="estilo/list.do"><spring:message code="master.page.profile.estilo.list"></spring:message></a> </li>
+					<security:authorize access="hasRole('ADMIN')">
+						<li> <a href="estilo/create.do"><spring:message code="master.page.profile.estilo.create"></spring:message></a> </li>
+					</security:authorize>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="isAnonymous()">
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile.estilo" />
 				</a>
 				<ul>
 					<li class="arrow"></li>
@@ -123,6 +143,10 @@
 					<li> <a href="solicitud/list.do"><spring:message code="master.page.profile.solicitudes.list"></spring:message></a> </li>
 				</ul>
 			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('ALUMNO')">
+			<li><a class="fNiv" href="alumno/edit.do"><spring:message code="master.page.alumno.editAlumno" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

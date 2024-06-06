@@ -30,6 +30,7 @@
 		<value>/views/estilo/messages</value>
 		<value>/views/tutorial/messages</value>
 		<value>/views/solicitud/messages</value>
+		<value>/views/alumno/messages</value>
 	</util:list>
 
 </beans>

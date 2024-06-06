@@ -50,6 +50,17 @@ public class CursoController extends AbstractController {
 	private int					cursoId	= -1;
 
 
+	@RequestMapping(value = "/listForAnonymous", method = RequestMethod.GET)
+	public ModelAndView listAnonymous(@ModelAttribute("ayuda") final Ayuda sol, final BindingResult bindingResult) {
+		ModelAndView result;
+		Collection<Curso> cursos;
+		cursos = this.cursoService.findAll();
+		result = new ModelAndView("curso/list");
+		result.addObject("requestURI", "curso/list.do");
+		result.addObject("cursos", cursos);
+		return result;
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@ModelAttribute("ayuda") final Ayuda sol, final BindingResult bindingResult) {
 		ModelAndView result;

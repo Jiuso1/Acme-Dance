@@ -30,13 +30,13 @@
 	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
-			<a href="estilo/deleteEstilo.do?estiloId=${row.id}" method="GET">
+			<a href="estilo/deleteEstilo.do?estiloId=${row.id}">
 				<spring:message	code="estilo.borrarEstilo" />
 			</a>
 		</display:column>
 		
 		<display:column>
-			<a href="estilo/editEstilo.do?styleId=${row.id}" method="GET">
+			<a href="estilo/editEstilo.do?styleId=${row.id}" >
 				<spring:message	code="estilo.editEstilo" />
 			</a>
 		</display:column>
